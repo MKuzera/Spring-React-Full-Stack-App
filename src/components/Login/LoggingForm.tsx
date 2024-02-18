@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import "./LoggingForm.css";
 import {useNavigate} from "react-router-dom";
-import Login from "../../Api/Login";
+import {AuthContext} from "../../security/AuthContext";
 
 
 interface LoggingFormValues {
@@ -10,6 +10,8 @@ interface LoggingFormValues {
 }
 
 const LoggingForm: React.FC = () => {
+    const authContext = useContext(AuthContext);
+
     const navigate = useNavigate();
     const [error, setError] = useState<string>("");
     const [form, setForm] = useState<LoggingFormValues>({
@@ -27,8 +29,16 @@ const LoggingForm: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent) => {
 
         e.preventDefault(); // prevent refresh
-        navigate(`/start/${form.login}`);
-        // Do something with form data, e.g., send it to server
+        try {
+            await authContext.login(form.login, form.password);
+
+            navigate(`/start/${form.login}`);
+        } catch (error) {
+            setForm({ login: "", password: "" });
+            setError("Authentication failed");
+        }
+
+
     };
 
     return (

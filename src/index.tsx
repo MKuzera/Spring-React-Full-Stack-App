@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './components/App/App';
-import startPage from "./components/StartPage/startPage";
-import reportWebVitals from './reportWebVitals';
-import StartPage from "./components/StartPage/startPage";
+
+
+import 'bootstrap/dist/css/bootstrap.css'
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

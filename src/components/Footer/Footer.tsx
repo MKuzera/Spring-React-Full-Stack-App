@@ -1,7 +1,7 @@
-
+import './footer.css';
 function Footer(){
     return(
-        <div>xD</div>
+        <div className="footer">--FOOTER--</div>
     );
 }
 
